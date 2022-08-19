@@ -2,6 +2,9 @@ package com.DanielZambon.crud.data.vo;
 
 import java.io.Serializable;
 
+import org.modelmapper.ModelMapper;
+
+import com.DanielZambon.crud.entity.Produto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -33,5 +36,9 @@ public class ProdutoVO implements Serializable {
 	
 	@JsonProperty("preco")
 	private Double preco;
+	
+	public static ProdutoVO create(Produto produto) {
+		return new ModelMapper().map(produto, ProdutoVO.class);
+	}
 	
 }
