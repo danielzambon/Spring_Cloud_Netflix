@@ -44,8 +44,8 @@ public class Produto implements Serializable  {
 	@Column(name= "preco", nullable = false, length = 10)
 	private Double preco;
 	
-	public static Produto create(ProdutoVO produto) {
-		return new ModelMapper().map(produto, Produto.class);
+	public static Produto create(ProdutoVO produtoVO) {
+		return new ModelMapper().map(produtoVO, Produto.class);
 	}
 
 }
