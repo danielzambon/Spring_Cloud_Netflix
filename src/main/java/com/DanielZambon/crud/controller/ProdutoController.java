@@ -3,9 +3,6 @@ package com.DanielZambon.crud.controller;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import javax.persistence.EntityManager;
-
-import org.hibernate.EntityMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,16 +14,17 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.DanielZambon.crud.data.vo.ProdutoVO;
-import com.DanielZambon.crud.entity.Produto;
 import com.DanielZambon.crud.services.ProdutoService;
 
 @RestController
@@ -74,6 +72,21 @@ public class ProdutoController {
 		proVO.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
 		return proVO;
 		
+	}
+	
+	@PutMapping(produces= {"application/json","application/xml","application/x-yaml"}, consumes = {"application/json","application/xml","application/x-yaml"})
+	public ProdutoVO update(@RequestBody ProdutoVO produtoVO) {
+		
+		ProdutoVO proVO = produtoService.update(produtoVO);
+		proVO.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
+		return proVO;
+		
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable("id") Long id){
+		produtoService.delete(id);
+		return ResponseEntity.ok().build();
 	}
 	
 
