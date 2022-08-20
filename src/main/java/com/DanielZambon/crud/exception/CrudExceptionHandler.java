@@ -14,10 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CrudExceptionHandler extends ResponseEntityExceptionHandler{
 
 	public final ResponseEntity<ExceptionResponse> handlerBadRequestException(Exception ex, WebRequest request){
-		ExceptionResponse exceptionResponse = new ExceptionResponse(
-				new Date(), 
-				ex.getMessage(), 
-				request.getDescription(false));
+		ExceptionResponse exceptionResponse = new ExceptionResponse();
 		
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}

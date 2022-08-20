@@ -15,9 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExceptionResponse implements Serializable {
-	public ExceptionResponse(Date date, String message, String description) {
-		// TODO Auto-generated constructor stub
-	}
 	private static final long serialVersionUID = 1L;
 	
 	private Date timestamp;
